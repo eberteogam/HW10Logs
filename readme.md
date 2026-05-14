@@ -1,1 +1,1 @@
-﻿https://eberteogam.github.io/comp484-project2/
+﻿https://eberteogam.github.io/HW10Logs/
