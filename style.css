@@ -1,0 +1,291 @@
+/* ── Reset ─────────────────────────────────────────── */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Body: full-page background image ──────────────── */
+body {
+    font-family: helvetica, arial, sans-serif;
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+header {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.7);
+    letter-spacing: 2px;
+}
+
+/* ── Main: centers the Tamagotchi device ────────────── */
+main {
+    display: flex;
+    justify-content: center;
+}
+
+/* ══════════════════════════════════════════════════════
+   TAMAGOTCHI SHELL
+   Egg-shaped body made with border-radius.
+   The horizontal radii are equal to create a round
+   oval; vertical radii are taller on the bottom to
+   give the classic egg silhouette.
+══════════════════════════════════════════════════════ */
+.tamagotchi {
+    width: 320px;
+    padding: 20px 28px 45px;
+    border-radius: 52% 52% 48% 48% / 38% 38% 62% 62%;
+    background: linear-gradient(160deg, #f9d5e5 0%, #e8a0ba 60%, #d4779a 100%);
+    border: 7px solid #b85580;
+    box-shadow:
+        inset 0 6px 18px rgba(255, 255, 255, 0.45),
+        inset 0 -6px 12px rgba(0, 0, 0, 0.15),
+        0 12px 35px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* ── Keychain hole at the top of the shell ──────────── */
+.chain-hole {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #b85580;
+    border: 3px solid #8b3060;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 14px;
+}
+
+/* ══════════════════════════════════════════════════════
+   LCD SCREEN
+   Dark green tinted panel like a classic handheld LCD.
+══════════════════════════════════════════════════════ */
+.screen {
+    width: 100%;
+    height: 175px;
+    background: #1c2e1c;
+    border: 5px solid #0d1a0d;
+    border-radius: 14px;
+    box-shadow:
+        inset 0 3px 10px rgba(0, 0, 0, 0.8),
+        0 3px 6px rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ── Pet image inside the screen ────────────────────── */
+.pet-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* fits the whole image inside without cropping */
+    object-position: center bottom; /* anchor to bottom so dog stands on the floor */
+    /* position:relative lets top-based CSS animation work */
+    position: relative;
+    /* Slight green tint to match old LCD screens */
+    filter: drop-shadow(0 0 6px rgba(100, 220, 100, 0.35));
+}
+
+/* ── CSS-only up/down bounce (Play button) ───────────
+   Uses the `top` property with position:relative.
+   No JavaScript moves the image — only the class toggle. */
+@keyframes bounce-updown {
+    0%   { top: 0px; }
+    25%  { top: -28px; }
+    50%  { top: 0px; }
+    75%  { top: -28px; }
+    100% { top: 0px; }
+}
+
+.pet-image.playing {
+    animation: bounce-updown 0.6s ease-in-out;
+}
+
+/* ── Stats panel ─────────────────────────────────────── */
+.stats-panel {
+    width: 100%;
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #3a1a28;
+    line-height: 1.7;
+}
+
+/* ── Notification box ───────────────────────────────────
+   Hidden by default. jQuery .fadeIn() / .fadeOut()
+   reveal it after each button press. */
+.notification {
+    display: none;
+    width: 100%;
+    margin-top: 8px;
+    padding: 7px 12px;
+    background: rgba(255, 255, 255, 0.55);
+    border-left: 4px solid #b85580;
+    border-radius: 6px;
+    font-style: italic;
+    font-size: 13px;
+    color: #5a1535;
+    text-align: center;
+}
+
+/* ── Rename input ────────────────────────────────────── */
+.rename-container {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.rename-container input {
+    flex: 1;
+    padding: 5px 8px;
+    border-radius: 12px;
+    border: 2px solid #b85580;
+    background: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    color: #3a1a28;
+    outline: none;
+}
+
+.rename-container input::placeholder {
+    color: #b88aa0;
+}
+
+.rename-container button {
+    padding: 5px 12px;
+    border-radius: 12px;
+    border: 2px solid #8b3060;
+    background: radial-gradient(circle at 35% 30%, #ff9fc0, #c0507a);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.rename-container button:active {
+    transform: scale(0.95);
+}
+
+/* ══════════════════════════════════════════════════════
+   TAMAGOTCHI BUTTONS
+   Round, raised buttons with a radial gradient and
+   inset highlight to look like physical plastic buttons.
+══════════════════════════════════════════════════════ */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.button-container button {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 3px solid #8b3060;
+    /* Radial gradient gives a convex 3D look */
+    background: radial-gradient(circle at 35% 30%, #ff9fc0, #c0507a);
+    box-shadow:
+        0 5px 8px rgba(0, 0, 0, 0.35),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    /* Smooth press effect */
+    transition: transform 0.08s, box-shadow 0.08s;
+}
+
+/* Slight grow on hover */
+.button-container button:hover {
+    transform: scale(1.07);
+}
+
+/* Pressed-in effect on click */
+.button-container button:active {
+    transform: scale(0.93);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.35),
+        inset 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ══════════════════════════════════════════════════════
+   CONSOLE DEMO SECTION
+   Small rectangular buttons under the main controls
+   that fire the different console.* methods from the
+   DevTools tutorial. Styled compactly so the Tamagotchi
+   shell stays the focal point.
+══════════════════════════════════════════════════════ */
+.console-demo {
+    width: 100%;
+    margin-top: 18px;
+    padding: 10px 8px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.console-demo-title {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #3a1a28;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.console-demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.console-demo button {
+    padding: 5px 9px;
+    border-radius: 10px;
+    border: 2px solid #8b3060;
+    background: radial-gradient(circle at 35% 30%, #ff9fc0, #c0507a);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.08s;
+}
+
+.console-demo button:hover {
+    transform: scale(1.05);
+}
+
+.console-demo button:active {
+    transform: scale(0.93);
+}

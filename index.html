@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rex's Giga Pet</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <header>
+      <h1>Rex's Giga Pet</h1>
+    </header>
+
+    <main>
+      <!-- Tamagotchi shell wrapper -->
+      <div class="tamagotchi">
+
+        <!-- Small keychain hole at the top (decorative) -->
+        <div class="chain-hole"></div>
+
+        <!-- LCD screen: shows the pet image -->
+        <div class="screen">
+          <!-- Keep src as-is per requirement -->
+          <img class="pet-image" id="pet-image" src="images/dog.png" alt="Rex the Hound">
+        </div>
+
+        <!-- Stats panel below the screen -->
+        <div class="stats-panel">
+          <div>Name: <strong><span class="name"></span></strong></div>
+          <div>Weight: <strong><span class="weight"></span> lbs</strong></div>
+          <div>Happiness: <strong><span class="happiness"></span> wags/min</strong></div>
+          <!-- Energy stat added for the Sleep button -->
+          <div>Energy: <strong><span class="energy"></span> zZz</strong></div>
+        </div>
+
+        <!-- Visual notification shown after each button press (no alert/console.log) -->
+        <div id="notification" class="notification"></div>
+
+        <!-- Rename input: uses jQuery .val() to read and update the pet's name -->
+        <div class="rename-container">
+          <input type="text" id="rename-input" placeholder="Rename your pet...">
+          <button id="rename-button">OK</button>
+        </div>
+
+        <!-- Round Tamagotchi-style action buttons -->
+        <div class="button-container">
+          <button class="treat-button">Treat</button>
+          <button class="play-button">Play</button>
+          <button class="exercise-button">Exercise</button>
+          <button class="sleep-button">Sleep</button>
+        </div>
+
+        <!-- Console demo section: each button triggers a different console
+             message type from the Chrome DevTools "View messages logged from
+             JavaScript" tutorial. Open DevTools → Console to see the output. -->
+        <div class="console-demo">
+          <div class="console-demo-title">Console Demo (open DevTools)</div>
+          <div class="console-demo-row">
+            <button class="log-button">Log</button>
+            <button class="log-warning-button">Log Warning</button>
+            <button class="log-error-button">Log Error</button>
+            <button class="log-table-button">Log Table</button>
+          </div>
+          <div class="console-demo-row">
+            <button class="log-group-button">Log Group</button>
+            <button class="log-custom-button">Log Custom</button>
+          </div>
+          <div class="console-demo-row">
+            <button class="cause-404-button">Cause 404</button>
+            <button class="cause-typeerror-button">Cause TypeError</button>
+            <button class="cause-violation-button">Cause Violation</button>
+          </div>
+        </div>
+
+      </div><!-- end .tamagotchi -->
+    </main>
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+  </body>
+</html>
